@@ -213,6 +213,21 @@ class AppleAppStoreClient:
             url, AnalyticsReportSegment, params
         )
 
+    async def get_analytics_report_segment_details(
+        self,
+        segment_id: str,
+    ) -> AnalyticsReportSegment:
+        url = f"{API_BASE}/analyticsReportSegments/{segment_id}"
+
+        response = ApiResponse[AnalyticsReportSegment].model_validate_json(
+            await self.http.request(
+                self.log,
+                url,
+            )
+        )
+
+        return response.data
+
     async def stream_tsv_data(
         self,
         filename: str,

@@ -128,6 +128,7 @@ async def _stream_analytics_report_data(
     )
 
     for segment in segments:
+        segment = await client.get_analytics_report_segment_details(segment.id)
         log.debug(
             f"Processing analytics report segment {segment.id} for app {app_id}",
             {
